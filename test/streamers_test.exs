@@ -20,4 +20,9 @@ defmodule StreamersTest do
       M3U8[program_id: 1, bandwidth: 110000, path: "test/fixtures/emberjs/8bda35243c7c0a7fc69ebe1383c6464c.m3u8"]
     assert length(m3u8s) == 5
   end
+
+  test "process m3u8" do
+    m3u8s = @index_file |> Streamers.extract_m3u8 |> Streamers.process_m3u8
+    assert length(Enum.first(m3u8s).ts_files) == 510
+  end
 end
